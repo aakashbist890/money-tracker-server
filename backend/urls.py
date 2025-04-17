@@ -39,6 +39,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("dj_rest_auth.urls")),
     path("api/users/", include("users.urls")),
+    path('api/transactions/', include('transactions.urls')),
 ]
 
 if settings.DEBUG:

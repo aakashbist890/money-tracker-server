@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
-from .models import Transaction
+from .models import Transaction, Category
 import pandas as pd
 from rest_framework.response import Response
+from .serializers import CategorySerializer
 
 
 class SpendingAnalyticsView(APIView):
@@ -25,3 +26,9 @@ class SpendingAnalyticsView(APIView):
                 "category_distribution": category_data,
             }
         )
+
+class CategoriesView(APIView):
+    def get(self, request):
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
